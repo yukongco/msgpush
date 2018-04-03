@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package proto;
+
+// Interface exported by the server.
+service DispatchService {
+	rpc DispatchMsg (DspMsgReq) returns (DspMsgResp) {}
+}
+
+message DspMsgReq {
+	string key = 1;                         // 设备token或key
+	string expire = 2;                      // 过期时间
+	string pushUtc = 3;                     // 定时时间时间戳
+	string cert = 4;                        // ios 证书名称
+	string platform = 5;                    // 平台名称
+	string phone  = 6;                      // 手机号码, 用于短信通知
+	string msg = 7;                         // 消息内容
+	string pushId = 8;                      // 消息 id, 唯一标识
+	string topic = 9;                       // IOS生产环境需要 topic
+	string callback = 10;                   // 定时器的回调地址
+	string code = 11;                       // 运营商code,唯一标识
+	string localAddr = 12;                  // 本机 ip 地址
+}
+
+message DspMsgResp {
+}
+
+
+
+
