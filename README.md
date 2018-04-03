@@ -3,6 +3,7 @@
 it is msg push
 ios
 android
+pc
 
 ios: ios channel
 
