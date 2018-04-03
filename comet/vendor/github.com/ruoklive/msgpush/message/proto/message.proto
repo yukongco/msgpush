@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package proto;
+
+// Interface exported by the server.
+service msgSaveService {
+	rpc GetMsgByKey (MsgFilter) returns (FilterResp) {}
+    rpc MsgSave (MsgSaveReq) returns (MsgSaveResp) {}
+	rpc DelSetByMem (DelSetReq) returns (DelSetResp) {}
+	rpc RegisterCli (RegCliReq) returns (RegCliResp) {}
+	rpc DelCli (DelCliReq) returns (DelCliResp) {}
+	rpc GetSerAddr (SerType) returns (AddrResp) {}
+	rpc Ping (MsgPingReq) returns (MsgPingResp) {}
+} 
+
+message MsgFilter {
+	string key = 1;                         // key=devId+code
+}
+
+message FilterResp {
+	repeated MsgSaveReq content = 1;       //  存储的消息
+}
+
+message MsgSaveReq {
+	string devId = 1;                       // 设备token或者key
+	string expire = 2;                      // 过期时间
+	string platform = 3;                    // 平台名称
+	string phone  = 4;                      // 手机号码, 用于短信通知
+	string msg = 5;                         // 消息内容
+	string pushId = 6;                      // 消息 id, 唯一标识
+	string callback = 7;                    // 定时器的回调地址
+	string code = 8;                        // 运营商的唯一标识
+}
+
+message MsgSaveResp {
+}
+
+message DelSetReq {
+	string key = 1;                         // key=devId+code
+	string member = 2;                      // set 的字段
+}
+
+message DelSetResp {
+}
+
+
+message RegCliReq {
+	string key = 1;                         // comet or message key
+	string conectAddr = 2;                  // conet addr
+}
+
+message RegCliResp {
+}
+
+message DelCliReq {
+	string key = 1;                         // comet or message key
+	string conectAddr = 2;                  // conet addr, member	
+}
+
+message DelCliResp {
+}
+
+message SerType {
+	string type = 1;                         // 服务类型, 1= all 2=comet, 3=message
+}
+
+message AddrResp {
+	repeated string addrs = 1;               // 各服务的 ip+port
+}
+
+message MsgPingReq {
+}
+
+message MsgPingResp {
+}
+
+
+
